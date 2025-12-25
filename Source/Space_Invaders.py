@@ -39,6 +39,13 @@ class Player(pygame.sprite.Sprite):
         self.speed = 8
         self.lives = 3
 
+    def update(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT] and self.rect.left > 0:
+            self.rect.x -= self.speed
+        if keys[pygame.K_RIGHT] and self.rect.right < SCREEN_WIDTH:
+            self.rect.x += self.speed
+
     def shoot(self):
         bullet = Bullet(self.rect.centerx, self.rect.top)
         all_sprites.add(bullet)
@@ -60,6 +67,22 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.y += self.speed
         if self.rect.bottom < 0:
             self.kill()
+
+
+# Класс Пришельца
+class Alien(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        self.image = pygame.Surface((40, 30))
+        self.image.fill(RED)
+        # Простая форма пришельца
+        pygame.draw.rect(self.image, RED, (10, 0, 20, 20))
+        pygame.draw.rect(self.image, RED, (5, 20, 10, 10))
+        pygame.draw.rect(self.image, RED, (25, 20, 10, 10))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.speed = 1
 
 
 # Группы спрайтов

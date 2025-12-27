@@ -93,3 +93,15 @@ bullets = pygame.sprite.Group()
 # Создание игрока
 player = Player()
 all_sprites.add(player)
+
+
+# Создание пришельцев
+def create_aliens():
+    for row in range(5):
+        for col in range(11):
+            alien = Alien(100 + col * 50, 50 + row * 50)
+            all_sprites.add(alien)
+            aliens.add(alien)
+
+
+create_aliens()
